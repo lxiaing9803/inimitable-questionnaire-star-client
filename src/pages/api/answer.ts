@@ -27,9 +27,8 @@ export default async function handler(
     });
   try {
     const answer = genAnswer(req.body);
-    console.log("answer:", answer);
     const resData = await postAnswer(answer);
-    if (resData.code === 0) {
+    if (resData.code === 200 || resData.code === 201) {
       return res.redirect("/success");
     } else {
       return res.redirect("/fail");

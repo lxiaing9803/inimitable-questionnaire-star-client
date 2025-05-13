@@ -6,7 +6,7 @@ interface PropsType {
   id: string;
   code: number;
   data: {
-    id: string;
+    _id: string;
     title: string;
     isPublished: boolean;
     isDeleted: boolean;
@@ -23,7 +23,7 @@ const componentWrapper = "border-b border-[#f1f1f1]] pt-[16px]";
 export default function Question(props: PropsType) {
   const { code, data, msg, id } = props;
 
-  if (code !== 0) {
+  if (code !== 200 && code !== 201) {
     return (
       <PageWrapper title="错误">
         <h1>错误</h1>
@@ -76,7 +76,7 @@ export default function Question(props: PropsType) {
     <PageWrapper title={title} desc={desc}>
       <div className="px-[16px]">
         <form method="post" action="/api/answer">
-          <input type="hidden" name="questionId" value={id || data?.id} />
+          <input type="hidden" name="questionId" value={id || data?._id} />
           {ComponentListElem}
           <div className="flex justify-center m-[16px]">
             <button
